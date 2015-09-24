@@ -1,0 +1,16 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Runtime data
+*.pid
+*.seed
+
+# Dependencies
+/node_modules
+
+# Users Environment Variables
+.lock-wscript
+
+# Misc
+/connect.lock
+/coverage/*
+*.log
