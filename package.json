@@ -21,8 +21,10 @@
     "hapi": "10.0.1",
     "joi": "6.7.1",
     "lob": "3.5.0",
+    "node-uuid": "1.4.3",
     "pg": "4.4.2",
-    "pg-native": "1.9.0"
+    "pg-native": "1.9.0",
+    "underscore": "1.8.3"
   },
   "devDependencies": {
     "husky": "0.10.1",

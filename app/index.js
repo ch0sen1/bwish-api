@@ -26,19 +26,15 @@ server.connection({
 
 server.register([
   require('./plugins')
-], function (err) {
+], err => {
   if (err) throw err;
 
-  server.start(function (err) {
+  server.start(err => {
     if (err) return Util.log('Error:', err.message);
-    Util.log('Server started on port ' + Config.PORT);
+    Util.log(`Server started on port ${Config.PORT}`);
   });
 });
 
-process.on('SIGTERM', function () {
-  server.stop({timeout: 5 * 1000}, function () {
-    process.exit(0);
-  });
-});
+process.on('SIGTERM', () => server.stop({timeout: 5 * 1000}, () => process.exit(0)));
 
 module.exports = server;

@@ -4,6 +4,15 @@
 let config = {
   CORS: ['*'],
   PORT: 4000,
+  PG: {
+    // user: process.env.User
+    // database: process.env.User
+    // password: null
+    // port: 5432
+    // host: 'localhost'
+    // ssl: false
+    database: 'bwish'
+  },
   LOB_API_KEY: process.env.LOB_API_KEY
 };
 
