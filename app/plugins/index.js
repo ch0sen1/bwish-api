@@ -1,21 +1,18 @@
 'use strict';
 
-var Boom = require('boom');
+let Boom = require('boom');
+let _ = require('underscore');
 
-exports.register = function (server, options, next) {
+exports.register = (server, options, next) => {
   server.route(
-    [
-      {
-        method: 'GET',
-        path: '/',
-        handler: function (req, reply) {
-          reply(new Boom.notFound());
-        },
-        config: {
-          description: 'not found 404 error'
-        }
+    _.union([{
+      method: 'GET',
+      path: '/{path*}',
+      handler: reply => reply(new Boom.notFound()),
+      config: {
+        description: 'not found'
       }
-    ].concat(require('./user'))
+    }], require('./user'))
   );
 
   next();

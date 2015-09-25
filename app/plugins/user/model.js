@@ -1,11 +1,19 @@
 'use strict';
 
-var Joi = require('joi');
+let Joi = require('joi');
 
 module.exports = {
-  user_id: Joi.string().guid().required(),
-  email: Joi.string().email().required(),
-  password: Joi.string().required(),
-  address: Joi.string().guid(),
-  address_book: Joi.array().items(Joi.string().guid())
+  path: '/user',
+
+  primary_key: 'user_id',
+
+  table: 'users',
+
+  schema: Joi.object().keys({
+    user_id: Joi.string().guid(),
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+    address: Joi.string().guid().default(null),
+    address_book: Joi.array().items(Joi.string().guid()).default(null)
+  })
 };
