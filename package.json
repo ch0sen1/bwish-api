@@ -12,7 +12,7 @@
     "url": "git://github.com/ch0sen1/bwish-api.git"
   },
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4.0.0"
   },
   "author": "Oscar Paramo",
   "license": "MIT",
@@ -20,7 +20,9 @@
     "boom": "2.9.0",
     "hapi": "10.0.1",
     "joi": "6.7.1",
-    "lob": "3.5.0"
+    "lob": "3.5.0",
+    "pg": "4.4.2",
+    "pg-native": "1.9.0"
   },
   "devDependencies": {
     "husky": "0.10.1",

@@ -38,7 +38,7 @@ module.exports = [
     method: 'PUT',
     path: path + '/{id}',
     handler: function (request, reply) {
-      return reply('hello changed user');
+      return reply('changed user: ' + encodeURIComponent(request.params.id));
     },
     config: {
       description: 'update a user',
@@ -50,7 +50,7 @@ module.exports = [
     method: 'DELETE',
     path: path + '/{id}',
     handler: function (request, reply) {
-      return reply('hello deleted user');
+      return reply('deleted user: ' + encodeURIComponent(request.params.id));
     },
     config: {
       description: 'delete a user'
