@@ -11,7 +11,7 @@ module.exports = [
     path: model.path,
     handler: (request, reply) => {
       Lob.addresses.list(request.query, (err, res) => {
-        if (err) return reply(new Boom.wrap(err));
+        if (err) return reply(new Boom.create(err.status_code, err.message));
 
         return reply(res);
       });
@@ -27,7 +27,7 @@ module.exports = [
     path: `${model.path}/{id}`,
     handler:  (request, reply) => {
       Lob.addresses.retrieve(request.params.id, (err, res) => {
-        if (err) return reply(new Boom.wrap(err));
+        if (err) return reply(new Boom.create(err.status_code, err.message));
 
         return reply(res);
       });
@@ -43,7 +43,7 @@ module.exports = [
     path: model.path,
     handler: (request, reply) => {
       Lob.addresses.create(request.payload, (err, res) => {
-        if (err) return reply(new Boom.wrap(err));
+        if (err) return reply(new Boom.create(err.status_code, err.message));
 
         return reply(res);
       });
@@ -55,11 +55,27 @@ module.exports = [
       }
     }
   }, {
+    method: 'POST',
+    path: `${model.path}/verify`,
+    handler: (request, reply) => {
+      Lob.verification.verify(request.payload, (err, res) => {
+        if (err) return reply(new Boom.create(err.status_code, err.message));
+
+        return reply(res);
+      });
+    },
+    config: {
+      description: `add address`,
+      validate: {
+        payload: model.verifyAddress
+      }
+    }
+  }, {
     method: 'DELETE',
     path: `${model.path}/{id}`,
     handler: (request, reply) => {
       Lob.addresses.delete(request.params.id, (err, res) => {
-        if (err) return reply(new Boom.wrap(err));
+        if (err) return reply(new Boom.create(err.status_code, err.message));
 
         return reply(res);
       });
