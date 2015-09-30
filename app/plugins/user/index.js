@@ -13,9 +13,6 @@ pg.defaults.database = Config.PG.database;
 
 // removes clients from pool and return boom error
 let handleError = (err, client, done) => {
-  // no error occurred
-  if (!err) return;
-
   // an error occured, remove the client from the pool
   if (client) done(client);
 
@@ -71,6 +68,7 @@ module.exports = [
     },
     config: {
       description: `get ${model.resource}`,
+
       validate: {
         params: model.params
       }
@@ -99,6 +97,7 @@ module.exports = [
     },
     config: {
       description: `get ${model.resource} by email`,
+
       validate: {
         params: model.params
       }
@@ -151,6 +150,7 @@ module.exports = [
     },
     config: {
       description: `add ${model.resource}`,
+
       validate: {
         payload: model.payload
       }
@@ -218,6 +218,7 @@ module.exports = [
     },
     config: {
       description: `update ${model.resource}`,
+
       validate: {
         params: model.params,
 
@@ -263,6 +264,7 @@ module.exports = [
     },
     config: {
       description: `delete ${model.resource}`,
+
       validate: {
         params: model.params,
 

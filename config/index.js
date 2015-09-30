@@ -13,7 +13,8 @@ let config = {
     // ssl: false
     database: 'bwish'
   },
-  LOB_API_KEY: process.env.LOB_API_KEY
+  LOB_API_KEY: process.env.LOB_API_KEY,
+  JWT_SECRET: process.env.JWT_SECRET
 };
 
 // set up for production environment
