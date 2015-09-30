@@ -12,7 +12,7 @@ exports.register = (server, options, next) => {
       config: {
         description: 'not found'
       }
-    }], require('./user'), require('./address'))
+    }], require('./user'), require('./address'), require('./postcard'))
   );
 
   next();

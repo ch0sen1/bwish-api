@@ -65,7 +65,7 @@ module.exports = [
       });
     },
     config: {
-      description: `add address`,
+      description: `verify address`,
       validate: {
         payload: model.verifyAddress
       }
