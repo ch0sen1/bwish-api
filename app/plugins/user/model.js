@@ -7,13 +7,25 @@ module.exports = {
 
   primary_key: 'user_id',
 
-  table: 'users',
+  resource: 'users',
 
-  schema: Joi.object().keys({
+  params: Joi.object().keys({
+    id: Joi.string().guid(),
+
+    email: Joi.string().email()
+  }),
+
+  payload: Joi.object().keys({
     user_id: Joi.string().guid(),
+
     email: Joi.string().email().required(),
+
     password: Joi.string().required(),
-    address: Joi.string().guid().default(null),
-    address_book: Joi.array().items(Joi.string().guid()).default(null)
+
+    address: Joi.string().default(null),
+
+    address_book: Joi.array().items(Joi.string()).default(null),
+
+    new_password: Joi.string()
   })
 };
