@@ -38,19 +38,19 @@ module.exports = {
       Joi.string().uri(),
 
       Joi.string()
-    ).required(),
+    ),
 
     setting: Joi.number().valid(1001, 1002).default(1001),
 
-    data: Joi.object(),
+    data: Joi.object().default(null),
 
-    metadata: Joi.object().pattern(/^.{1,40}/, Joi.string().max(500)).max(20)
+    metadata: Joi.object().pattern(/^.{1,40}/, Joi.string().max(500)).max(20).default(null)
   }).xor('message', 'back'),
 
   query: Joi.object().keys({
     count: Joi.number().max(100).default(10),
 
-    metadata: Joi.object().pattern(/^.{1,40}/, Joi.string().max(500)).max(20),
+    metadata: Joi.object().pattern(/^.{1,40}/, Joi.string().max(500)).max(20).default(null),
 
     offset: Joi.number().default(0)
   })

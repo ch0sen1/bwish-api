@@ -18,6 +18,7 @@ module.exports = [
     },
     config: {
       description: `get all postcard`,
+
       validate: {
         query: model.query
       }
@@ -34,6 +35,7 @@ module.exports = [
     },
     config: {
       description: `get postcard`,
+
       validate: {
         params: model.params
       }
@@ -50,6 +52,7 @@ module.exports = [
     },
     config: {
       description: `add postcard`,
+
       validate: {
         payload: model.payload
       }

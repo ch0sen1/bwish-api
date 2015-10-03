@@ -22,7 +22,7 @@ module.exports = {
 
     address_line1: Joi.string().required(),
 
-    address_line2: Joi.string(),
+    address_line2: Joi.string().default(null),
 
     address_city: Joi.string().required(),
 
@@ -32,7 +32,9 @@ module.exports = {
 
     address_country: Joi.string().max(2).required(),
 
-    metadata: Joi.object().pattern(/^.{1,40}/, Joi.string().max(500)).max(20)
+    metadata: Joi.object().keys({
+      dob: Joi.date().format('MM/DD')
+    }).pattern(/^.{1,40}/, Joi.string().max(500)).max(20).default(null)
   }).or('name', 'company'),
 
   verifyAddress: Joi.object().keys({

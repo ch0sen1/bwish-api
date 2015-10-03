@@ -18,6 +18,7 @@ module.exports = [
     },
     config: {
       description: `get all address`,
+
       validate: {
         query: model.query
       }
@@ -34,6 +35,7 @@ module.exports = [
     },
     config: {
       description: `get address`,
+
       validate: {
         params: model.params
       }
@@ -50,6 +52,7 @@ module.exports = [
     },
     config: {
       description: `add address`,
+
       validate: {
         payload: model.payload
       }
@@ -66,6 +69,7 @@ module.exports = [
     },
     config: {
       description: `verify address`,
+
       validate: {
         payload: model.verifyAddress
       }
@@ -82,6 +86,7 @@ module.exports = [
     },
     config: {
       description: `delete address`,
+
       validate: {
         params: model.params
       }
