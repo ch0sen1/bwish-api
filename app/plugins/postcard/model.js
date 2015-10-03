@@ -50,7 +50,7 @@ module.exports = {
   query: Joi.object().keys({
     count: Joi.number().max(100).default(10),
 
-    metadata: Joi.object().pattern(/^.{1,40}/, Joi.string().max(500)).max(20).default(null),
+    metadata: Joi.object().pattern(/^.{1,40}/, Joi.string().max(500)).max(20),
 
     offset: Joi.number().default(0)
   })
