@@ -150,6 +150,8 @@ exports.register = (server, options, next) => {
         });
       },
       config: {
+        auth: false,
+
         description: `add ${model.resource}`,
 
         validate: {
@@ -176,20 +178,17 @@ exports.register = (server, options, next) => {
             if (err) return reply(handleError(err, client, done));
 
             // check for password
-            let hashCheck = hash.isHashed(request.payload.password);
-            if (hashCheck && request.payload.password !== result.rows[0].password) return reply(new Boom.unauthorized('invalid password'));
-            else if (!hashCheck && !hash.verify(request.payload.password, result.rows[0].password)) return reply(new Boom.unauthorized('invalid password'));
+            if (!hash.verify(request.payload.password, result.rows[0].password)) return reply(new Boom.unauthorized('invalid password'));
 
             // remove password from payload
             delete request.payload.password;
 
             // update password
-            hashCheck = hash.isHashed(request.payload.new_password);
-            if (hashCheck) {
+            if (hash.isHashed(request.payload.new_password)) {
               request.payload.password = request.payload.new_password;
 
               delete request.payload.new_password;
-            } else if (request.payload.new_password && !hashCheck) {
+            } else if (request.payload.new_password) {
               request.payload.password = hash.generate(request.payload.new_password);
 
               delete request.payload.new_password;
@@ -245,9 +244,7 @@ exports.register = (server, options, next) => {
             if (request.payload.email !== result.rows[0].email) return reply(new Boom.unauthorized('invalid email'));
 
             // check for password
-            let hashCheck = hash.isHashed(request.payload.password);
-            if (hashCheck && request.payload.password !== result.rows[0].password) return reply(new Boom.unauthorized('invalid password'));
-            else if (!hashCheck && !hash.verify(request.payload.password, result.rows[0].password)) return reply(new Boom.unauthorized('invalid password'));
+            if (!hash.verify(request.payload.password, result.rows[0].password)) return reply(new Boom.unauthorized('invalid password'));
 
             return client.query ({
               text: `DELETE FROM ${model.resource} WHERE ${model.primary_key}=$1`,

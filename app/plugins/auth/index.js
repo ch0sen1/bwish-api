@@ -54,9 +54,7 @@ exports.register = function (server, options, next) {
           if (result.rows.length !== 1) return reply(new Boom.notFound(`email '${request.payload.email}' not found`));
 
           // check for password
-          let hashCheck = hash.isHashed(request.payload.password);
-          if (hashCheck && request.payload.password !== result.rows[0].password) return reply(new Boom.unauthorized('invalid password'));
-          else if (!hashCheck && !hash.verify(request.payload.password, result.rows[0].password)) return reply(new Boom.unauthorized('invalid password'));
+          if (!hash.verify(request.payload.password, result.rows[0].password)) return reply(new Boom.unauthorized('invalid password'));
 
           // add user_id to payload
           request.payload.id = result.rows[0].user_id;
