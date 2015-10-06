@@ -63,11 +63,13 @@ exports.register = function (server, options, next) {
           delete request.payload.new_password;
 
           // return jwt
-          return reply(jwt.sign(request.payload, Config.JWT_SECRET, {
-            expiresIn: '2 days',
-            audience: 'web',
-            issuer: 'bwish-api'
-          }));
+          return reply({
+            token: jwt.sign(request.payload, Config.JWT_SECRET, {
+              expiresIn: '2 days',
+              audience: 'web',
+              issuer: 'bwish-api'
+            })
+          });
         });
       });
     },
