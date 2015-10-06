@@ -111,19 +111,13 @@ exports.register = (server, options, next) => {
           if (err) return reply(handleError(err, client, done));
 
           // sanitize payload
-          if (request.payload.new_password) delete request.payload.new_password;
+          delete request.payload.new_password;
 
           // generate primary_key value
           request.payload[model.primary_key] = uuid.v4();
 
           // salt and hash password
           if (!hash.isHashed(request.payload.password)) request.payload.password = hash.generate(request.payload.password);
-
-          let keys = Object.keys(request.payload);
-          let valuesList = _.reduce(keys, (memo, val, index) => {
-            if (index < keys.length - 1) return `${memo}$${index + 1}, `;
-            else return `${memo}$${keys.length}`;
-          }, '');
 
           client.query ({
             text: `SELECT *
@@ -135,7 +129,13 @@ exports.register = (server, options, next) => {
 
             if (result.rows.length > 0) return reply(new Boom.unauthorized('email already exists'));
 
-            return client.query ({
+            let keys = Object.keys(request.payload);
+            let valuesList = _.reduce(keys, (memo, val, index) => {
+              if (index < keys.length - 1) return `${memo}$${index + 1}, `;
+              else return `${memo}$${keys.length}`;
+            }, '');
+
+            client.query ({
               text: `INSERT INTO ${model.resource} (${keys.toString()}) VALUES (${valuesList})`,
               values: _.map(keys, key => request.payload[key])
             }, err => {
@@ -143,6 +143,9 @@ exports.register = (server, options, next) => {
 
               // remove client from pool
               done();
+
+              // sanitize payload
+              delete request.payload.password;
 
               return reply(request.payload);
             });
