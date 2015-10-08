@@ -203,7 +203,7 @@ exports.register = (server, options, next) => {
               else return `${memo}${val}=$${keys.length}`;
             }, '');
 
-            return client.query ({
+            client.query ({
               text: `UPDATE ${model.resource}
               SET ${valuesList}
               WHERE ${model.primary_key}='${request.params.id}'`,
@@ -249,7 +249,7 @@ exports.register = (server, options, next) => {
             // check for password
             if (!hash.verify(request.payload.password, result.rows[0].password)) return reply(new Boom.unauthorized('invalid password'));
 
-            return client.query ({
+            client.query ({
               text: `DELETE FROM ${model.resource} WHERE ${model.primary_key}=$1`,
               values: [request.params.id]
             }, (err, result) => {
