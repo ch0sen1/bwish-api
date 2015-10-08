@@ -26,6 +26,8 @@ module.exports = {
 
     address_book: Joi.array().items(Joi.string()).default(null),
 
+    postcards: Joi.array().items(Joi.string()).default(null),
+
     new_password: Joi.string().default(null)
   })
 };
